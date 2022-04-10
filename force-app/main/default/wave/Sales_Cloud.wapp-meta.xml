@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WaveApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <folder>Sales_Cloud</folder>
+    <masterLabel>Sales Cloud</masterLabel>
+    <shares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>test-eq5mqg0i4wzk@example.com</sharedTo>
+        <sharedToType>User</sharedToType>
+    </shares>
+    <templateOrigin>Sales_Cloud</templateOrigin>
+    <templateVersion>1.0</templateVersion>
+</WaveApplication>

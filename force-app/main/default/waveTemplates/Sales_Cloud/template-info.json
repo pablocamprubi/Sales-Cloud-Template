@@ -1,0 +1,89 @@
+{
+  "templateType" : "app",
+  "label" : "Sales Cloud",
+  "name" : "Sales_Cloud",
+  "description" : "",
+  "assetVersion" : 54.0,
+  "variableDefinition" : "variables.json",
+  "uiDefinition" : "ui.json",
+  "rules" : [
+    {
+      "type" : "templateToApp",
+      "file" : "template-to-app-rules.json"
+    },
+    {
+      "type" : "appToTemplate",
+      "file" : "app-to-template-rules.json"
+    }
+  ],
+  "releaseInfo" : {
+    "templateVersion" : "1.0",
+    "notesFile" : "releaseNotes.html"
+  },
+  "folderDefinition" : "folder.json",
+  "externalFiles" : [ ],
+  "lenses" : [ ],
+  "dashboards" : [
+    {
+      "label" : "End User Overview",
+      "name" : "End_User_Overview_tp",
+      "condition" : "${Variables.Overrides.createAllDashboards}",
+      "file" : "dashboards/End_User_Overview.json"
+    }
+  ],
+  "components" : [ ],
+  "eltDataflows" : [ ],
+  "recipes" : [
+    {
+      "label" : "Base_PlatformAdministration",
+      "name" : "Base_PlatformAdministration",
+      "condition" : "${Variables.Overrides.createAllRecipes}",
+      "file" : "recipes/Base_PlatformAdministration.json"
+    },
+    {
+      "label" : "Base_UserAgregation",
+      "name" : "Base_UserAgregation",
+      "condition" : "${Variables.Overrides.createAllRecipes}",
+      "file" : "recipes/Base_UserAgregation.json"
+    }
+  ],
+  "datasetFiles" : [
+    {
+      "label" : "PermissionSetLicense",
+      "name" : "rootPermissionSetLicense_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/rootPermissionSetLicense_XMD.json"
+    },
+    {
+      "label" : "TenantUsageEntitlement",
+      "name" : "rootTenantUsageEntitlement_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/rootTenantUsageEntitlement_XMD.json"
+    },
+    {
+      "label" : "UserInformationPII",
+      "name" : "rootUserInformationPII_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/rootUserInformationPII_XMD.json"
+    },
+    {
+      "label" : "UserLicense",
+      "name" : "rootUserLicense_tp",
+      "condition" : "${Variables.Overrides.createAllDatasetFiles}",
+      "userXmd" : "dataset_files/rootUserLicense_XMD.json"
+    }
+  ],
+  "storedQueries" : [ ],
+  "imageFiles" : [ ],
+  "extendedTypes" : { },
+  "templateDependencies" : [ ],
+  "icons" : {
+    "appBadge" : {
+      "name" : "16.png"
+    },
+    "templateBadge" : {
+      "name" : "default.png"
+    },
+    "templatePreviews" : [ ]
+  }
+}

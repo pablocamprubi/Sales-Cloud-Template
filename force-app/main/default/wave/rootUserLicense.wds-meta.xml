@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WaveDataset xmlns="http://soap.sforce.com/2006/04/metadata">
+    <application>Sales_Cloud</application>
+    <description>Created from the Base_PlatformAdministration recipe.</description>
+    <masterLabel>UserLicense</masterLabel>
+    <templateAssetSourceName>rootUserLicense_tp</templateAssetSourceName>
+    <type>default</type>
+</WaveDataset>

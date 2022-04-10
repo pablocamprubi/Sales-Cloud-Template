@@ -1,0 +1,859 @@
+{
+  "name" : "Base_UserAgregation",
+  "label" : "Base_UserAgregation",
+  "scheduleExpression" : null,
+  "publishingTarget" : "DATASET",
+  "format" : "R3",
+  "scheduleType" : null,
+  "recipeDefinition" : {
+    "version" : "54.0",
+    "nodes" : {
+      "LOAD_DATASET1" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Id",
+            "LastName",
+            "FirstName",
+            "Division",
+            "Department",
+            "Country",
+            "IsActive",
+            "UserRoleId",
+            "ProfileId"
+          ],
+          "dataset" : {
+            "type" : "connectedDataset",
+            "label" : "User",
+            "connectionName" : "SFDC_LOCAL",
+            "sourceObjectName" : "User"
+          }
+        }
+      },
+      "EXTRACT1" : {
+        "action" : "extractGrains",
+        "sources" : [
+          "JOIN8"
+        ],
+        "parameters" : {
+          "grainExtractions" : [ ]
+        }
+      },
+      "AGGREGATE3" : {
+        "action" : "aggregate",
+        "sources" : [
+          "EXTRACT1"
+        ],
+        "parameters" : {
+          "aggregations" : [
+            {
+              "action" : "COUNT",
+              "source" : "Id",
+              "name" : "COUNT_Id",
+              "label" : "Count of User ID"
+            }
+          ],
+          "groupings" : [
+            "Profile.Name"
+          ],
+          "pivots" : [ ],
+          "nodeType" : "STANDARD"
+        }
+      },
+      "EXTRACT2" : {
+        "action" : "extractGrains",
+        "sources" : [
+          "JOIN8"
+        ],
+        "parameters" : {
+          "grainExtractions" : [ ]
+        }
+      },
+      "AGGREGATE5" : {
+        "action" : "aggregate",
+        "sources" : [
+          "EXTRACT2"
+        ],
+        "parameters" : {
+          "aggregations" : [
+            {
+              "action" : "COUNT",
+              "source" : "Id",
+              "name" : "COUNT_Id",
+              "label" : "Count of User ID"
+            }
+          ],
+          "groupings" : [
+            "UserRole.Name"
+          ],
+          "pivots" : [ ],
+          "nodeType" : "STANDARD"
+        }
+      },
+      "EXTRACT3" : {
+        "action" : "extractGrains",
+        "sources" : [
+          "JOIN8"
+        ],
+        "parameters" : {
+          "grainExtractions" : [ ]
+        }
+      },
+      "AGGREGATE7" : {
+        "action" : "aggregate",
+        "sources" : [
+          "EXTRACT3"
+        ],
+        "parameters" : {
+          "aggregations" : [
+            {
+              "action" : "COUNT",
+              "source" : "Id",
+              "name" : "COUNT_Id",
+              "label" : "Count of User ID"
+            }
+          ],
+          "groupings" : [
+            "Country"
+          ],
+          "pivots" : [ ],
+          "nodeType" : "STANDARD"
+        }
+      },
+      "EXTRACT4" : {
+        "action" : "extractGrains",
+        "sources" : [
+          "JOIN8"
+        ],
+        "parameters" : {
+          "grainExtractions" : [ ]
+        }
+      },
+      "AGGREGATE9" : {
+        "action" : "aggregate",
+        "sources" : [
+          "EXTRACT4"
+        ],
+        "parameters" : {
+          "aggregations" : [
+            {
+              "action" : "UNIQUE",
+              "source" : "Id",
+              "name" : "UNIQUE_Id",
+              "label" : "Unique User ID"
+            }
+          ],
+          "groupings" : [
+            "Department"
+          ],
+          "pivots" : [ ],
+          "nodeType" : "STANDARD"
+        }
+      },
+      "JOIN6" : {
+        "action" : "join",
+        "sources" : [
+          "FORMULA0",
+          "LOAD_DATASET3"
+        ],
+        "schema" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [
+              "UserProfile.PermissionsEmailSingle",
+              "UserProfile.PermissionsEmailMass",
+              "UserProfile.PermissionsEditTask",
+              "UserProfile.PermissionsEditEvent",
+              "UserProfile.PermissionsExportReport",
+              "UserProfile.PermissionsImportPersonal",
+              "UserProfile.PermissionsDataExport",
+              "UserProfile.PermissionsManageUsers",
+              "UserProfile.PermissionsEditPublicFilters",
+              "UserProfile.PermissionsEditPublicTemplates",
+              "UserProfile.PermissionsModifyAllData",
+              "UserProfile.PermissionsManageCases",
+              "UserProfile.PermissionsMassInlineEdit",
+              "UserProfile.PermissionsEditKnowledge",
+              "UserProfile.PermissionsManageKnowledge",
+              "UserProfile.PermissionsManageSolutions",
+              "UserProfile.PermissionsCustomizeApplication",
+              "UserProfile.PermissionsEditReadonlyFields",
+              "UserProfile.PermissionsRunReports",
+              "UserProfile.PermissionsViewSetup",
+              "UserProfile.PermissionsTransferAnyEntity",
+              "UserProfile.PermissionsNewReportBuilder",
+              "UserProfile.PermissionsActivateContract",
+              "UserProfile.PermissionsActivateOrder",
+              "UserProfile.PermissionsImportLeads",
+              "UserProfile.PermissionsManageLeads",
+              "UserProfile.PermissionsTransferAnyLead",
+              "UserProfile.PermissionsViewAllData",
+              "UserProfile.PermissionsEditPublicDocuments",
+              "UserProfile.PermissionsViewEncryptedData",
+              "UserProfile.PermissionsEditBrandTemplates",
+              "UserProfile.PermissionsEditHtmlTemplates",
+              "UserProfile.PermissionsChatterInternalUser",
+              "UserProfile.PermissionsManageTranslation",
+              "UserProfile.PermissionsManageEncryptionKeys",
+              "UserProfile.PermissionsDeleteActivatedContract",
+              "UserProfile.PermissionsChatterInviteExternalUsers",
+              "UserProfile.PermissionsSendSitRequests",
+              "UserProfile.PermissionsOverrideForecasts",
+              "UserProfile.PermissionsViewAllForecasts",
+              "UserProfile.PermissionsApiUserOnly",
+              "UserProfile.PermissionsManageRemoteAccess",
+              "UserProfile.PermissionsCanUseNewDashboardBuilder",
+              "UserProfile.PermissionsManageCategories",
+              "UserProfile.PermissionsConvertLeads",
+              "UserProfile.PermissionsPasswordNeverExpires",
+              "UserProfile.PermissionsUseTeamReassignWizards",
+              "UserProfile.PermissionsEditActivatedOrders"
+            ]
+          }
+        },
+        "parameters" : {
+          "joinType" : "LOOKUP",
+          "leftKeys" : [
+            "ProfileId"
+          ],
+          "rightQualifier" : "Profile",
+          "rightKeys" : [
+            "Id"
+          ]
+        }
+      },
+      "LOAD_DATASET3" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Id",
+            "Name"
+          ],
+          "dataset" : {
+            "type" : "connectedDataset",
+            "label" : "Profile",
+            "connectionName" : "SFDC_LOCAL",
+            "sourceObjectName" : "Profile"
+          }
+        }
+      },
+      "LOAD_DATASET4" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Id",
+            "Name"
+          ],
+          "dataset" : {
+            "type" : "connectedDataset",
+            "label" : "UserRole",
+            "connectionName" : "SFDC_LOCAL",
+            "sourceObjectName" : "UserRole"
+          }
+        }
+      },
+      "EXTRACT5" : {
+        "action" : "extractGrains",
+        "sources" : [
+          "JOIN8"
+        ],
+        "parameters" : {
+          "grainExtractions" : [ ]
+        }
+      },
+      "AGGREGATE11" : {
+        "action" : "aggregate",
+        "sources" : [
+          "EXTRACT5"
+        ],
+        "parameters" : {
+          "aggregations" : [
+            {
+              "action" : "UNIQUE",
+              "source" : "Id",
+              "name" : "UNIQUE_Id",
+              "label" : "Unique User ID"
+            }
+          ],
+          "groupings" : [
+            "Division"
+          ],
+          "pivots" : [ ],
+          "nodeType" : "STANDARD"
+        }
+      },
+      "JOIN8" : {
+        "action" : "join",
+        "sources" : [
+          "JOIN6",
+          "LOAD_DATASET4"
+        ],
+        "schema" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [ ]
+          }
+        },
+        "parameters" : {
+          "joinType" : "LOOKUP",
+          "leftKeys" : [
+            "UserRoleId"
+          ],
+          "rightQualifier" : "UserRole",
+          "rightKeys" : [
+            "Id"
+          ]
+        }
+      },
+      "JOIN9" : {
+        "action" : "join",
+        "sources" : [
+          "JOIN8",
+          "AGGREGATE5"
+        ],
+        "schema" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [ ]
+          }
+        },
+        "parameters" : {
+          "joinType" : "LOOKUP",
+          "leftKeys" : [
+            "UserRole.Name"
+          ],
+          "rightQualifier" : "UsersInRoleCount",
+          "rightKeys" : [
+            "UserRole.Name"
+          ]
+        }
+      },
+      "JOIN10" : {
+        "action" : "join",
+        "sources" : [
+          "JOIN9",
+          "AGGREGATE3"
+        ],
+        "schema" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [ ]
+          }
+        },
+        "parameters" : {
+          "joinType" : "LOOKUP",
+          "leftKeys" : [
+            "Profile.Name"
+          ],
+          "rightQualifier" : "UserInProfileCount",
+          "rightKeys" : [
+            "Profile.Name"
+          ]
+        }
+      },
+      "JOIN11" : {
+        "action" : "join",
+        "sources" : [
+          "JOIN10",
+          "AGGREGATE7"
+        ],
+        "schema" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [ ]
+          }
+        },
+        "parameters" : {
+          "joinType" : "LOOKUP",
+          "leftKeys" : [
+            "Country"
+          ],
+          "rightQualifier" : "AggregateU",
+          "rightKeys" : [
+            "Country"
+          ]
+        }
+      },
+      "JOIN12" : {
+        "action" : "join",
+        "sources" : [
+          "JOIN11",
+          "AGGREGATE9"
+        ],
+        "schema" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [ ]
+          }
+        },
+        "parameters" : {
+          "joinType" : "LOOKUP",
+          "leftKeys" : [
+            "Department"
+          ],
+          "rightQualifier" : "UserDepartment",
+          "rightKeys" : [
+            "Department"
+          ]
+        }
+      },
+      "JOIN13" : {
+        "action" : "join",
+        "sources" : [
+          "JOIN12",
+          "AGGREGATE11"
+        ],
+        "schema" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [ ]
+          }
+        },
+        "parameters" : {
+          "joinType" : "LOOKUP",
+          "leftKeys" : [
+            "Division"
+          ],
+          "rightQualifier" : "AggregateU1",
+          "rightKeys" : [
+            "Division"
+          ]
+        }
+      },
+      "OUTPUT0" : {
+        "action" : "save",
+        "sources" : [
+          "JOIN13"
+        ],
+        "parameters" : {
+          "fields" : [ ],
+          "dataset" : {
+            "type" : "analyticsDataset",
+            "label" : "UserInformationPII",
+            "name" : "${App.Datasets.rootUserInformationPII_tp.Name}",
+            "folderName" : "${App.Folder.FullyQualifiedName}"
+          }
+        }
+      },
+      "LOAD_DATASET5" : {
+        "action" : "load",
+        "sources" : [ ],
+        "parameters" : {
+          "fields" : [
+            "Id",
+            "Username",
+            "LastName",
+            "FirstName",
+            "Name",
+            "Division",
+            "Department",
+            "Country",
+            "IsActive",
+            "UserRoleId",
+            "ProfileId",
+            "ManagerId",
+            "CreatedDate",
+            "SystemModstamp",
+            "SmallPhotoUrl",
+            "BannerPhotoUrl"
+          ],
+          "dataset" : {
+            "type" : "connectedDataset",
+            "label" : "User",
+            "connectionName" : "SFDC_LOCAL",
+            "sourceObjectName" : "User"
+          }
+        }
+      },
+      "FLATTEN0" : {
+        "action" : "flatten",
+        "sources" : [
+          "LOAD_DATASET5"
+        ],
+        "parameters" : {
+          "selfField" : "Id",
+          "parentField" : "ManagerId",
+          "multiField" : {
+            "name" : "Id_flatten_multiField",
+            "label" : "parentuser",
+            "isSystemField" : false
+          },
+          "pathField" : {
+            "name" : "Id_flatten",
+            "label" : "User ID Path",
+            "isSystemField" : false
+          },
+          "includeSelfId" : true
+        }
+      },
+      "JOIN14" : {
+        "action" : "join",
+        "sources" : [
+          "FLATTEN0",
+          "LOAD_DATASET1"
+        ],
+        "schema" : {
+          "fields" : [ ],
+          "slice" : {
+            "mode" : "DROP",
+            "ignoreMissingFields" : true,
+            "fields" : [ ]
+          }
+        },
+        "parameters" : {
+          "joinType" : "LOOKUP",
+          "leftKeys" : [
+            "ManagerId"
+          ],
+          "rightQualifier" : "ReportsTo",
+          "rightKeys" : [
+            "Id"
+          ]
+        }
+      },
+      "FORMULA0" : {
+        "action" : "formula",
+        "sources" : [
+          "JOIN14"
+        ],
+        "parameters" : {
+          "expressionType" : "SQL",
+          "fields" : [
+            {
+              "type" : "TEXT",
+              "name" : "IsActive_formula",
+              "label" : "ActivatedUser",
+              "formulaExpression" : "case when \"IsActive\" = 'true' then 'Activated Users' else 'Deactivated Users' end",
+              "precision" : 255,
+              "defaultValue" : ""
+            }
+          ]
+        }
+      }
+    },
+    "ui" : {
+      "nodes" : {
+        "LOAD_DATASET1" : {
+          "label" : "User",
+          "description" : "",
+          "type" : "LOAD_DATASET",
+          "top" : 251.89999999999998,
+          "left" : 532,
+          "parameters" : {
+            "sampleSize" : 10000
+          }
+        },
+        "AGGREGATE2" : {
+          "label" : "AggregateUserProfile",
+          "description" : "",
+          "type" : "AGGREGATE",
+          "top" : 532,
+          "left" : 1512,
+          "graph" : {
+            "EXTRACT1" : null,
+            "AGGREGATE3" : null
+          },
+          "connectors" : [
+            {
+              "source" : "EXTRACT1",
+              "target" : "AGGREGATE3"
+            }
+          ]
+        },
+        "AGGREGATE4" : {
+          "label" : "AggregateUserRole",
+          "description" : "",
+          "type" : "AGGREGATE",
+          "top" : 392,
+          "left" : 1232,
+          "graph" : {
+            "EXTRACT2" : null,
+            "AGGREGATE5" : null
+          },
+          "connectors" : [
+            {
+              "source" : "EXTRACT2",
+              "target" : "AGGREGATE5"
+            }
+          ]
+        },
+        "AGGREGATE6" : {
+          "label" : "AggregateUserCountry",
+          "description" : "",
+          "type" : "AGGREGATE",
+          "top" : 672,
+          "left" : 1652,
+          "graph" : {
+            "EXTRACT3" : null,
+            "AGGREGATE7" : null
+          },
+          "connectors" : [
+            {
+              "source" : "EXTRACT3",
+              "target" : "AGGREGATE7"
+            }
+          ]
+        },
+        "AGGREGATE8" : {
+          "label" : "AggregateUserDepartment",
+          "description" : "",
+          "type" : "AGGREGATE",
+          "top" : 811.9,
+          "left" : 1792.7,
+          "graph" : {
+            "EXTRACT4" : null,
+            "AGGREGATE9" : null
+          },
+          "connectors" : [
+            {
+              "source" : "EXTRACT4",
+              "target" : "AGGREGATE9"
+            }
+          ]
+        },
+        "JOIN6" : {
+          "label" : "JoinProfile",
+          "description" : "",
+          "type" : "JOIN",
+          "top" : 392.2,
+          "left" : 812
+        },
+        "LOAD_DATASET3" : {
+          "label" : "Profile",
+          "type" : "LOAD_DATASET",
+          "top" : 253.60000000000002,
+          "left" : 813.5,
+          "parameters" : {
+            "sampleSize" : 10000
+          }
+        },
+        "LOAD_DATASET4" : {
+          "label" : "UserRole",
+          "type" : "LOAD_DATASET",
+          "top" : 252.10000000000002,
+          "left" : 952.1,
+          "parameters" : {
+            "sampleSize" : 10000
+          }
+        },
+        "AGGREGATE10" : {
+          "label" : "AggregateUserDivision",
+          "description" : "",
+          "type" : "AGGREGATE",
+          "top" : 952,
+          "left" : 1932.3,
+          "graph" : {
+            "EXTRACT5" : null,
+            "AGGREGATE11" : null
+          },
+          "connectors" : [
+            {
+              "source" : "EXTRACT5",
+              "target" : "AGGREGATE11"
+            }
+          ]
+        },
+        "JOIN8" : {
+          "label" : "JoinRole",
+          "type" : "JOIN",
+          "top" : 392,
+          "left" : 952
+        },
+        "JOIN9" : {
+          "label" : "JoinUserRole",
+          "type" : "JOIN",
+          "top" : 392,
+          "left" : 1372
+        },
+        "JOIN10" : {
+          "label" : "JoinUserProfile",
+          "type" : "JOIN",
+          "top" : 392,
+          "left" : 1512
+        },
+        "JOIN11" : {
+          "label" : "JoinUserCountry",
+          "type" : "JOIN",
+          "top" : 392,
+          "left" : 1652
+        },
+        "JOIN12" : {
+          "label" : "UserDepartment",
+          "type" : "JOIN",
+          "top" : 392,
+          "left" : 1792
+        },
+        "JOIN13" : {
+          "label" : "UserDivision",
+          "type" : "JOIN",
+          "top" : 392,
+          "left" : 1932
+        },
+        "OUTPUT0" : {
+          "label" : "UserInformation",
+          "type" : "OUTPUT",
+          "top" : 392.2,
+          "left" : 2210.3
+        },
+        "LOAD_DATASET5" : {
+          "label" : "User",
+          "type" : "LOAD_DATASET",
+          "top" : 252.2,
+          "left" : 392.3,
+          "parameters" : {
+            "sampleSize" : 2000
+          }
+        },
+        "TRANSFORM0" : {
+          "label" : "FlattenManagerId",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 392,
+          "left" : 392.1,
+          "graph" : {
+            "FLATTEN0" : null
+          },
+          "connectors" : [ ]
+        },
+        "JOIN14" : {
+          "label" : "ReportsTo",
+          "description" : "",
+          "type" : "JOIN",
+          "top" : 392,
+          "left" : 532
+        },
+        "TRANSFORM1" : {
+          "label" : "TransformData",
+          "description" : "",
+          "type" : "TRANSFORM",
+          "top" : 392,
+          "left" : 672,
+          "graph" : {
+            "FORMULA0" : {
+              "parameters" : {
+                "type" : "BASE_FORMULA_UI"
+              }
+            }
+          },
+          "connectors" : [ ]
+        }
+      },
+      "connectors" : [
+        {
+          "source" : "TRANSFORM1",
+          "target" : "JOIN6"
+        },
+        {
+          "source" : "JOIN6",
+          "target" : "JOIN8"
+        },
+        {
+          "source" : "LOAD_DATASET3",
+          "target" : "JOIN6"
+        },
+        {
+          "source" : "LOAD_DATASET4",
+          "target" : "JOIN8"
+        },
+        {
+          "source" : "JOIN8",
+          "target" : "AGGREGATE4"
+        },
+        {
+          "source" : "JOIN8",
+          "target" : "AGGREGATE2"
+        },
+        {
+          "source" : "JOIN8",
+          "target" : "AGGREGATE6"
+        },
+        {
+          "source" : "JOIN8",
+          "target" : "AGGREGATE8"
+        },
+        {
+          "source" : "JOIN8",
+          "target" : "AGGREGATE10"
+        },
+        {
+          "source" : "JOIN8",
+          "target" : "JOIN9"
+        },
+        {
+          "source" : "AGGREGATE4",
+          "target" : "JOIN9"
+        },
+        {
+          "source" : "JOIN9",
+          "target" : "JOIN10"
+        },
+        {
+          "source" : "AGGREGATE2",
+          "target" : "JOIN10"
+        },
+        {
+          "source" : "JOIN10",
+          "target" : "JOIN11"
+        },
+        {
+          "source" : "AGGREGATE6",
+          "target" : "JOIN11"
+        },
+        {
+          "source" : "JOIN11",
+          "target" : "JOIN12"
+        },
+        {
+          "source" : "AGGREGATE8",
+          "target" : "JOIN12"
+        },
+        {
+          "source" : "JOIN12",
+          "target" : "JOIN13"
+        },
+        {
+          "source" : "AGGREGATE10",
+          "target" : "JOIN13"
+        },
+        {
+          "source" : "JOIN13",
+          "target" : "OUTPUT0"
+        },
+        {
+          "source" : "LOAD_DATASET5",
+          "target" : "TRANSFORM0"
+        },
+        {
+          "source" : "TRANSFORM0",
+          "target" : "JOIN14"
+        },
+        {
+          "source" : "LOAD_DATASET1",
+          "target" : "JOIN14"
+        },
+        {
+          "source" : "JOIN14",
+          "target" : "TRANSFORM1"
+        }
+      ],
+      "hiddenColumns" : [ ]
+    }
+  }
+}
